@@ -2,3 +2,259 @@
   text-align: center;
 }
 
+
+.foody-park{
+  font-family: 'Lobster Two', cursive;
+  margin: 0;
+  padding: 30px;
+  color: rgb(20, 112, 20);
+  letter-spacing: 10px;
+  background: url("https://image.shutterstock.com/image-vector/horizontal-backdrop-border-consisted-fresh-260nw-1342150685.jpg");
+  height: 150px;
+  font-weight: bolder;
+}
+
+.home-recipe{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.logo{
+  height: 390px;
+  width: 1950px;
+  object-fit: cover;
+}
+
+.notfound{
+  height: 600px;
+  width: 800px;
+}
+
+.line-home{
+  width: 100%;
+  border: 1px solid khaki;
+}
+
+.dessert-line{
+  width: 100%;
+  border: 1px solid plum;
+}
+
+.line-detl{
+  width: 100%;
+  border: 1px solid rgb(226, 172, 71);
+}
+
+.line-about{
+  width: 100%;
+  border: 1px solid lightgreen;
+}
+
+.rec-line{
+  width: 100%;
+  border: 1px solid lightskyblue;
+}
+
+.dessert-display-flex{
+ display: flex;
+ flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.dessert-flex{
+  display: flex;
+  flex-direction: column;
+    flex-wrap: wrap;
+    margin: 30px;
+  
+}
+.dessert-flex:hover{
+ cursor: pointer;
+}
+.dessert-img{
+  height: 500px;
+  width: 400px;
+  object-fit: cover;
+  margin: 10px;
+  transition: all 0.2s;
+}
+.dessert-img:hover{
+  transform: scale(1.05);
+  opacity: 0.5;
+}
+.dessert-name{
+  /* font-family: 'MonteCarlo', cursive; */
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+ letter-spacing: 6;
+ color: mistyrose;
+}
+.moredetails-div{
+  display: flex;
+      flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    padding: 20px;
+}
+.dessert-name-det{
+  /* font-family: 'PT Sans', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
+  color: lightskyblue;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+.dessert-img-det{
+  height: 800px;
+  width: 600px;
+  object-fit: cover;
+}
+
+.dessert-img-det:hover{
+  opacity: 0.8;
+}
+.det-div-flex{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 600px;
+  align-content: center;
+}
+.inte-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: start;
+}
+.dessert-ingre-det{
+ /* font-family: 'MonteCarlo', cursive; */
+ font-family: 'Open Sans', sans-serif;
+  color: lightskyblue;
+  letter-spacing: 3px;
+}
+
+.dessert-ingre-det-para{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 2px;
+  line-height: 2;
+  color: rgb(218, 229, 233);
+}
+
+.dessert-make-det{
+  font-family: 'Open Sans', sans-serif;
+  color: rgb(53, 211, 203);
+  letter-spacing: 3px;
+}
+
+.button{
+  margin: 50px;
+}
+
+.about-headings-1{
+  font-family: 'Lobster Two', cursive;
+  /* font-family: 'Open Sans', sans-serif; */
+  color: orange;
+  letter-spacing: 3px;
+}
+.about-headings{
+  font-family: 'Open Sans', sans-serif;
+  color: linen;
+  letter-spacing: 3px;
+}
+.about-headings-name{
+  font-family: 'Open Sans', sans-serif;
+  color: rgb(241, 194, 106);
+  letter-spacing: 3px;
+}
+
+.about-para{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 2px;
+  line-height: 2;
+  color: linen;
+}
+
+.home-headings{
+  font-family: 'Open Sans', sans-serif;
+  color: linen;
+  letter-spacing: 3px;
+}
+
+.footer{
+  height: 250px;
+  width: 100%;
+  background-color: rgb(250, 238, 218);
+  position: static;
+  bottom: 0;
+ 
+}
+
+.footer-icon-link{
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-f{
+  height: 60px;
+  width: 60px;
+  border-radius: 20rem;
+  object-fit: cover;
+  transition: all 0.2s;
+}
+
+.icon-f:hover{
+  transform: scale(1.05);
+}
+
+.icon-insta{
+  height: 85px;
+  width: 85px;
+  border-radius: 20rem;
+  object-fit: cover;
+  transition: all 0.2s;
+}
+
+.icon-insta:hover{
+  transform: scale(1.05);
+}
+
+.icon-twitter{
+  height: 60px;
+  width: 57px;
+  border-radius: 20rem;
+  object-fit: cover;
+  transition: all 0.2s;
+}
+
+.icon-twitter:hover{
+  transform: scale(1.05);
+}
+
+.icon-linked{
+  height: 60px;
+  width: 57px;
+  margin: 8px;
+  border-radius: 20rem;
+  object-fit: cover;
+  transition: all 0.2s;
+}
+
+.icon-linked:hover{
+  transform: scale(1.05);
+}
+
+.footer-words{
+  padding: 10px;
+  color: black;
+}
