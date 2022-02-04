@@ -379,7 +379,7 @@ function DessertMoredetails({dessertrep}){
     <h3 className="dessert-ingre-det-para">⭐{dessertdet.process5}</h3>
     </div>
 
-    <iframe width="800" height="500" src={dessertdet.recipevideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe className="recipevideo" width="800" height="500" src={dessertdet.recipevideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
    <div className="button">
     <Button onClick={()=>history.push("/dessert") } variant="outlined">Dessert Page</Button>
     </div>

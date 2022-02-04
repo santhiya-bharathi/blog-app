@@ -297,6 +297,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 0;
   }
 
   .home-gif-img{
@@ -312,4 +313,35 @@
     display: contents;
   }
 
+  .dessert-display-flex{
+    display: flex;
+    flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: center;
+    margin: 0;
+   }
+   
+  .dessert-flex{
+    display: flex;
+    flex-direction: column;
+      flex-wrap: wrap;
+  
+  }
+  .dessert-img{
+    height: 450px;
+    width: 250px;
+    object-fit: cover;
+    margin: 5px;
+    
+  }
+
+  .dessert-img-det{
+    height: 500px;
+    width: 340px;
+    object-fit: cover;
+  }
+  
+.recipevideo{
+  width: 330px;
+}
 }
