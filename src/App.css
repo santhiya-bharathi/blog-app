@@ -218,7 +218,7 @@
 }
 
 .footer{
-  height: 250px;
+  height: 300px;
   width: 100%;
   background-color: rgb(250, 238, 218);
   position: static;
@@ -287,4 +287,29 @@
 .footer-words{
   padding: 10px;
   color: black;
+}
+
+
+@media(max-width: 500px){
+
+  .home-gif-flex-1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .home-gif-img{
+    height: 290px;
+    width: 290px;
+    object-fit: cover;
+    margin:5px;
+    cursor: pointer;
+    
+  }
+
+  .det-div-flex{
+    display: contents;
+  }
+
 }

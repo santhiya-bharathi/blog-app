@@ -305,7 +305,7 @@ function About(){
         
       <h1 className='about-headings-1'>Hello and welcome to The Sandee Foody Court</h1>
       <div className="det-div-flex">
-      <h2 className='about-headings'>NICE TO MEET YOU !</h2>
+      <h2 className='about-headings'>NICE TO MEET YOU!</h2>
       <h3 className='about-headings-name'>HI I'M SANDEE</h3>
       <h4 className="about-para">I'm a student, now full time blogger. I live in india, I Love to Cook and Eat</h4>
       <h4 className="about-para">My mom is a talented chef and a food enthusiast.</h4>
