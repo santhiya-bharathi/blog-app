@@ -124,77 +124,77 @@ const initial_salad =[
   ingre3:"Spices. I love the flavorful mix of spices used to season the chickpeas in this recipe. We’re using a tasty blend of cumin, chili powder, salt, black pepper, oregano and paprika. It’s so much tastier than store-bought taco seasoning packets and so easy too! ",
   ingre4:"Water. Adding a bit of water will help the seasoning blend coat the chickpeas.",
   ingre5:"For serving. Serve your chickpea tacos using corn tortillas, flour tortillas or use any favorite wrap. We also like to add fresh cilantro, diced red onion, a squeeze of fresh lime juice and a sprinkle of cotija (or feta) cheese. Feel free to add any favorite toppings that you prefer.",
-  process1:"",
-  process2:"",
-  process3:"",
-  process4:"",
-  process5:"",
-  recipevideo:""},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/cherry-crisp-4-680x1020.jpg", 
-  recipename:"Cherry Crisp",
-  ingre1:"",
-  ingre2:"",
-  ingre3:"",
-  ingre4:"",
-  ingre5:"",
-  process1:"",
-  process2:"",
-  process3:"",
-  process4:"",
-  process5:"",
-  recipevideo:""},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/cherry-crisp-4-680x1020.jpg", 
-  recipename:"Cherry Crisp",
-  ingre1:"",
-  ingre2:"",
-  ingre3:"",
-  ingre4:"",
-  ingre5:"",
-  process1:"",
-  process2:"",
-  process3:"",
-  process4:"",
-  process5:"",
-  recipevideo:""},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/cherry-crisp-4-680x1020.jpg", 
-  recipename:"Cherry Crisp",
-  ingre1:"",
-  ingre2:"",
-  ingre3:"",
-  ingre4:"",
-  ingre5:"",
-  process1:"",
-  process2:"",
-  process3:"",
-  process4:"",
-  process5:"",
-  recipevideo:""},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/cherry-crisp-4-680x1020.jpg", 
-  recipename:"Cherry Crisp",
-  ingre1:"",
-  ingre2:"",
-  ingre3:"",
-  ingre4:"",
-  ingre5:"",
-  process1:"",
-  process2:"",
-  process3:"",
-  process4:"",
-  process5:"",
-  recipevideo:""},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/cherry-crisp-4-680x1020.jpg", 
-  recipename:"Cherry Crisp",
-  ingre1:"",
-  ingre2:"",
-  ingre3:"",
-  ingre4:"",
-  ingre5:"",
-  process1:"",
-  process2:"",
-  process3:"",
-  process4:"",
-  process5:"",
-  recipevideo:""}]
+  process1:"Making tacos has never been easier or more delicious with these flavorful chickpea tacos! You can have this mouth-watering meal on the table in less than 20 minutes, including prep time! Here’s the easy method:",
+  process2:"Prep the chickpeas. Drain and rinse the chickpeas, and then dry them off so that most of the excess moisture is gone.",
+  process3:"Cook the chickpeas. In a large skillet, heat the oil over medium high heat. Once hot, add in the chickpeas and cook, stirring often, for 10 minutes.",
+  process4:"Season the chickpea taco filling. Add in the spices and ¼ cup of water and cook for 2 more minutes, tossing so that the chickpeas get completely covered in the spices. Remove from the heat.",
+  process5:"Assemble the tacos. Fill warm tortillas with the chickpea taco filling. Now, add any other preferred toppings. Serve and enjoy!",
+  recipevideo:"https://www.youtube.com/embed/_zrh1mOGB2Q"},
+  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2018/11/Pom-Cocktail-Korbel-10-600x900.jpg", 
+  recipename:"Pomegranate Cocktail",
+  ingre1:"1/2 cup of white sugar, 1/2 cup of water, 2 sprigs of rosemary",
+  ingre2:"1/4 cup of pomegranate juice, 1 tablespoon (or more to taste) of the rosemary simple syrup",
+  ingre3:"1 cup of champagne for serving: extra sprigs of rosemary, pomegranate seeds",
+  ingre4:"6 ounces of pomegranate juice, 1 bottle of Korbel® Brut",
+  ingre5:"4 tablespoons of rosemary simple syrup for serving: extra sprigs of rosemary, pomegranate seeds",
+  process1:"Combine the sugar, water, and rosemary in a small saucepan and heat to simmering. ",
+  process2:"Simmer for 2 minutes and then remove from heat. Let steep for 30 minutes before discarding the rosemary sprigs.",
+  process3:"Store in the fridge in a sealed container.",
+  process4:"Mix all ingredients in a cocktail glass, garnish with pomegranate seeds and rosemary, and serve.",
+  process5:"Mix all of the ingredients in a pitcher and garnish with fresh rosemary and pomegranate seeds.",
+  recipevideo:"https://www.youtube.com/embed/HmsbfPsAr5k"},
+  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2019/07/Vegan-Pizza-12-600x900.jpg", 
+  recipename:"Vegan Pizza Recipe",
+  ingre1:"One vegan pizza dough, 1/2 cup of marinara sauce (more or less as desired, I like a lot), 1 small green bell pepper, diced",
+  ingre2:"½ teaspoon of garlic powder, 1 teaspoon of Italian seasoning",
+  ingre3:"¼ teaspoon of fine sea salt, ⅔ cup of mushrooms, thinly sliced",
+  ingre4:"1/4 cup of sliced black olives, ½ cup of red onion",
+  ingre5:"optional: vegan cheese for topping",
+  process1:"Pre-heat the oven to 450 degrees F. If you haven't already done so, prepare your crust. Recipe HERE. If you do NOT have a pizza stone, pre-bake the crust for 5 minutes after poking small holes all over the crust. If you DO have a pizza stone, you can skip the pre-baking process.",
+  process2:"Heat the oil in a large skillet over medium heat and once hot, add in the peppers, onion, and spices. Saute for 10 minutes, stirring often. Add in the mushrooms and saute for 5 additional minutes. Take off of the heat and set aside.",
+  process3:"To assemble the pizza, spread your sauce evenly over the pizza crust and then top with the sauteed veggies. If using, evenly distribute the black olives and the raw red onion on the pizza as well.",
+  process4:"Bake for 15-18 minutes or until the crust is nice and golden brown around the edges.",
+  process5:"Top with optional vegan parmesan cheese and ENJOY!",
+  recipevideo:"https://www.youtube.com/embed/4RdKPHibSME"},
+  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/03/pesto-gnocchi-2-680x1020.jpg", 
+  recipename:"Brussels Sprouts Pesto Gnocchi",
+  ingre1:"⅔ cup of pesto, 16 oz package of gnocchi",
+  ingre2:"16 ounce package of Ocean Mist Quick Cook Sprouts",
+  ingre3:"1 tablespoon of olive oil",
+  ingre4:"Salt and pepper to taste",
+  ingre5:"Parmesan for garnish ",
+  process1:"Cook the gnocchi according to package directions. Once done, drain the water and add the gnocchi back into the pot.",
+  process2:"While the gnocchi is cooking, open the package of sprouts and add in the olive oil, salt and pepper.",
+  process3:"Give it a shake to lightly combine and then re-seal the package.",
+  process4:"The directions call for you to cook it for 5 minutes but I like a little bite left in my sprouts so I cook them for just 4 minutes.",
+  process5:"Into the pot with the gnocchi, mix in the pesto and sprouts until everything is covered in the pesto. Sprinkle with optional cheese and ENJOY!",
+  recipevideo:"https://www.youtube.com/embed/GjtnhE14muE"},
+  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2020/04/classic-mojito-6.jpg", 
+  recipename:"Classic Mojito Recipe",
+  ingre1:"2 ounces of white rum, 1/2 of a medium lime, juiced (about 1 1/2 - 2 tablespoons/ 3/4 oz of juice)",
+  ingre2:"1 1/2 tablespoons (3/4 oz) of simple syrup, 5 mint leaves",
+  ingre3:"Club soda or sparkling water to top",
+  ingre4:"Ice",
+  ingre5:"Garnish: additional mint + lime wedges",
+  process1:"In a cocktail shaker or tall glass, muddle together the mint and lime juice.",
+  process2:"Add in the simple syrup, rum, and ice.",
+  process3:"Cover and shake about 30 times or until the liquid is cold and fully combined.",
+  process4:"Strain into a tall glass filled with ice and top with the club soda.",
+  process5:"Garnish and enjoy!",
+  recipevideo:"https://www.youtube.com/embed/NANdz-YKMUw"},
+  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/03/air-fryer-asparagus-4.jpg", 
+  recipename:"Air Fryer Asparagus",
+  ingre1:"Asparagus. be sure to use fresh asparagus for making asparagus in the air fryer.",
+  ingre2:"Olive oil. my go to is olive oil for this recipe, but avocado oil works too.",
+  ingre3:"Garlic powder. I love asparagus seasoned with garlic powder, but if you have another favorite seasoning, you can totally swap this out for something else.",
+  ingre4:"Salt & pepper. to bring all of the flavors together.",
+  ingre5:"Parmesan cheese. optional, but so delicious!",
+  process1:"This asparagus recipe could not be easier! Here’s a quick rundown of what’s involved, but you can find the complete printable recipe at the bottom of the post.",
+  process2:"Pre-heat the air fryer. Depending on the model of your air fryer (some don’t have the preheat function) preheat to 400 degrees F for 5 minutes.",
+  process3:"Prep the asparagus. Trim off the hard white ends. Drizzle with olive oil and sprinkle on the garlic powder, salt and pepper. Toss gently to combine.",
+  process4:"Cook the asparagus. Lay the asparagus flat in your air fryer, being careful not to stack it as best possible. Air fry for 5 minutes and then sprinkle on the parmesan cheese (if using) and continue to air fry for 2-4 additional minutes. ",
+  process5:"Enjoy! Sprinkle with additional parmesan as desired and serve.",
+  recipevideo:"https://www.youtube.com/embed/Os2epoeLfiU"}]
 
 const [saladrep, setSaladrep] = useState(initial_salad);
 
@@ -218,12 +218,11 @@ const [saladrep, setSaladrep] = useState(initial_salad);
     <div className='home-recipe'>
       <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Home</Button>
       <Button varient="text" color="inherit" onClick={()=>history.push("/about")}>About</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/recipes")}>Recipes</Button>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Salad</Button>
        <Button varient="text" color="inherit" onClick={()=>history.push("/dessert")}>Dessert</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Salad</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Resources</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Log in</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Sign up</Button>
+
+       <Button varient="text" color="inherit" onClick={()=>history.push("/log in")}>Log in</Button>
+       <Button varient="text" color="inherit" onClick={()=>history.push("/log in")}>Sign up</Button>
       
        </div>
        <Switch>
@@ -246,10 +245,6 @@ const [saladrep, setSaladrep] = useState(initial_salad);
 
         <Route path="/salad">
         <Salad saladrep={saladrep} setSaladrep={setSaladrep}/>
-        </Route>
-
-        <Route path="/recipes">
-        <Recipes/>
         </Route>
 
         <Route path="/about">
@@ -279,11 +274,24 @@ function NotFound(){
 }
 
 function Home() {
+
+const history = useHistory();
+
   return (
     <div className="home">
       <div className='line-home'></div>
      <h1 className='home-headings'>A food blog infused with culture and love</h1>
-     <h4 className='home-headings'>A food blog that makes cooking fun and simple - a perfect dish every time! Our easy and fail-proof recipes deliver authentic flavors using modern and innovative techniques.</h4>
+     <h4 className='home-headings'>A food blog that makes cooking fun and simple - a perfect dish every time! Our easy and proof recipes deliver authentic flavors using modern and innovative techniques.</h4>
+     
+     <div className='home-gif-flex-1'>
+     
+    <img className='home-gif-img' onClick={()=>history.push("/salad") } src="https://i.gifer.com/GKG.gif" alt="salad"/>
+    <img className='home-gif-img' onClick={()=>history.push("/dessert") } src="https://www.honeyandbirch.com/wp-content/uploads/2015/03/2015-03-27-12.59.07-1.gif" alt="dessert"/>
+    <img className='home-gif-img' onClick={()=>history.push("/dessert") } src="https://c.tenor.com/S3N_CBsPJYgAAAAC/dessert-chocolate.gif" alt="dessert"/>
+    
+    <img className='home-gif-img' onClick={()=>history.push("/salad") } src="https://i.gifer.com/9FfR.gif" alt="salad"/>
+    </div>
+   
      <Footer/>
     </div>
   );
@@ -307,14 +315,6 @@ function About(){
       </div>
 
       <Footer/>
-    </div>
-  );
-}
-
-function Recipes(){
-  return(
-    <div>
-       <div className='rec-line'></div>
     </div>
   );
 }
@@ -381,7 +381,7 @@ function DessertMoredetails({dessertrep}){
 
     <iframe width="800" height="500" src={dessertdet.recipevideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
    <div className="button">
-    <Button onClick={()=>history.push("/dessert") }variant="outlined">Dessert Page</Button>
+    <Button onClick={()=>history.push("/dessert") } variant="outlined">Dessert Page</Button>
     </div>
     </div>
     </div>
