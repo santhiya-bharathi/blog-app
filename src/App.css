@@ -318,6 +318,7 @@
     flex-direction: row;
        flex-wrap: wrap;
        justify-content: center;
+    padding: 10px;
     margin: 0;
    }
    
@@ -325,7 +326,7 @@
     display: flex;
     flex-direction: column;
       flex-wrap: wrap;
-  
+      align-items: center;
   }
   .dessert-img{
     height: 450px;
