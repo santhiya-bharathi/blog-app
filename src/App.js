@@ -195,7 +195,7 @@ useEffect(getDessert, []);
     <div>
        <div className='dessert-line'></div>
     <div className='dessert-display-flex'>
-      {dessertrep.map(({recipeimage,recipename},index)=>(<DessertList recipeimage={recipeimage} recipename={recipename} id={index}/>))}
+      {dessertrep.map(({recipeimage,recipename, _id},index)=>(<DessertList key={_id} recipeimage={recipeimage} recipename={recipename} id={_id}/>))}
     </div>
     <Footer/>
     </div>
@@ -286,7 +286,7 @@ useEffect(getSalad, []);
     <div>
        <div className='dessert-line'></div>
     <div className='dessert-display-flex'>
-      {saladrep.map(({recipeimage,recipename},index)=>(<SaladList recipeimage={recipeimage} recipename={recipename} id={index}/>))}
+      {saladrep.map(({recipeimage, recipename, _id})=>(<SaladList key={_id} recipeimage={recipeimage} recipename={recipename} id={_id}/>))}
     </div>
     <Footer/>
     </div>
@@ -368,7 +368,8 @@ function Footer(){
      <div className='footer-icon-link'>
      <h4 className="footer-words" varient="text" onClick={()=>history.push("/")}>Home</h4>
       <h4 className="footer-words" varient="text" onClick={()=>history.push("/about")}>About</h4>
-       <h4 className="footer-words" varient="text" onClick={()=>history.push("/recipes")}>Recipes</h4>
+      <h4 className="footer-words" varient="text" color="inherit" onClick={()=>history.push("/salad")}>Salad</h4>
+       <h4 className="footer-words" varient="text" color="inherit" onClick={()=>history.push("/dessert")}>Dessert</h4>
      </div>
      <div className='footer-icon-link'>
        <a target="_blank" rel="noreferrer" href='https://www.facebook.com'>
