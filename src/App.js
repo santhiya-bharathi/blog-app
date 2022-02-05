@@ -4,199 +4,19 @@ import Button from '@mui/material/Button';
 import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Switch, Route, useParams } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
-function App() {
+const API_URL = "https://recipe-blog-app-node.herokuapp.com";
 
-  const initial_dessert =[{recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2022/01/vegan-chocolate-mousse-3-680x1020.jpg",
-  recipename:"Vegan Chocolate Mousse",
-  ingre1:"Silken tofu – This type of tofu has a custardy texture. It works well in creamy and blended foods like smoothies, desserts, puddings, salad dressings, sauces and dips.",
-  ingre2:"Dark chocolate – I like to use a 3 oz dark chocolate bar, but feel free to use dark chocolate chips or any favorite chocolate. Go for a dairy free chocolate to keep this recipe vegan!",
-  ingre3:"Maple syrup – To naturally sweeten the mousse!",
-  ingre4:"Vanilla – For an extra boost of flavor that compliments the chocolate taste so well!",
-  ingre5:"Optional – We love this chocolate mousse topped with fresh berries! You could even add whipped cream and chocolate shavings. Use coconut or almond milk whipped cream and dairy-free chocolate to keep this mousse vegan friendly.",
-process1:"Melt the chocolate. Use a double boiler to melt the chocolate. The chocolate can also be melted in the microwave in 20 second increments.",
-process2:"Blend ingredients. Add the tofu, maple syrup, and vanilla to a food processor or blender and blend until fully combined.",
-process3:"Once combined, add in melted chocolate and blend again until smooth and creamy.",
-process4:"Chill. Transfer mousse from the food processor to an airtight container. Place in the fridge to chill for about 1 hour.",
-process5:"Serve. Spoon servings of mousse into individual bowls or jars and top with fresh berries and/or any other favorite toppings. Enjoy!",
-recipevideo:"https://www.youtube.com/embed/5MXqAWZd85w"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/cherry-crisp-4-680x1020.jpg", 
-  recipename:"Cherry Crisp",
-  ingre1:"Cherry filling. toss cherries along with the maple syrup, cornstarch, Juicy, fresh and so delicious!",
-  ingre2:"lemon juice",
-  ingre3:"vanilla and almond extract",
-  ingre4:"Oat topping. mix rolled oats, flour, brown sugar, butter, salt and cinnamon.",
-  ingre5:"These ingredients bake over the juicy cherries and create total magic. SO GOOD!",
-  process1:"Cherry filling. To make this simple cherry crisp recipe, first add the cherries, maple syrup, lemon juice, cornstarch, vanilla and almond extract to a bowl and toss gently to combine.",
-  process2:"Pour the cherry mixture and all of it’s juices into your prepared baking dish.",
-  process3:"Oat topping. In a separate mixing bowl, whisk together the crumble topping: rolled oats, flour, brown sugar, butter, salt, and cinnamon. Sprinkle the topping evenly over the cherries in the baking dish.",
-  process4:"Bake. Place the dessert in a preheated oven and bake for 30-35 minutes so that the cherries are nice and tender and the crumble topping is lightly browned.",
-  process5:"Cool and serve. Let crisp cool slightly and then serve (preferably with vanilla ice cream!) and ENJOY!",
-  recipevideo:"https://www.youtube.com/embed/Miy72TkUiVU"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/09/baked-cinnamon-apples-3-680x1020.jpg",
-  recipename:"Baked Cinnamon Apples",
-   ingre1:"Apples. Use an apple that will stand up to baking. More suggestions on what type of apple to use, below. I like to use a mix of Honeycrisp and Granny Smith apples for a nice balance of sweet and tart.",
-  ingre2:"Brown sugar. I love using brown sugar to sweeten the apple slices because it has a subtle caramel flavor that pairs wonderfully with apples.",
-  ingre3:"Cornstarch. Keeps the baked apple slices from becoming overly juicy.",
-  ingre4:"Cinnamon + nutmeg. Adds the perfect amount of warmth!",
-  ingre5:"Lemon juice. To balance the sweetness and add brightness to the overall flavor.",
-  process1:"Prep apples. Peel, core and slice your apples. Preheat the oven and grease a medium baking dish. ",
-  process2:"Toss apples with ingredients. In a large bowl, add the apples slices along with all other ingredients, except butter. Toss to coat.",
-  process3:"Bake. Place apples in the baking dish and add butter cubes on top. Cover the dish with foil and bake for 30-40 minutes, and until apples are tender.",
-  process4:"Serve. Once cooked, stir to coat the apples in the yummy juices. Serve for breakfast with granola and yogurt or for a little more indulgent sweet treat",
-  process5:"serve with vanilla ice cream or whipped cream.",
-  recipevideo:"https://www.youtube.com/embed/s8pf1Xkhkn4"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/07/berry-compote-5-680x1020.jpg",
-  recipename:"Mixed Berry Compote",
-  ingre1:"Mixed berries. I used a mix of strawberries, blueberries and raspberries.",
-  ingre2:"Feel free to use any combination of berries and add in blackberries too! Fresh or frozen berries work.",
-  ingre3:"Sugar. Granulated sugar helps sweeten the berries and make this sauce perfectly sweet. Start with about 1/3 cup of sugar and then taste the sauce. If you like your compote sweeter, you can always add more sugar.",
-  ingre4:"Lemon zest and lemon juice. Both are optional ingredients, so if you don’t have them available, no worries.",
-  ingre5:"However, they do add a pop of fresh favor that balances out the sweetness. Any citrus juice and zest will work.",
-  process1:"This recipe is so easy to make! You’ll need a saucepan or pot and about 20 minutes of prep and cook time. Here’s the simple steps:",
-  process2:"Combine & simmer ingredients. In a pot over medium heat, combine ingredients and bring them to a very gentle simmer.",
-  process3:"Cook. Stir frequently as the berries cook and break down a bit and they turn into a thick sauce.",
-  process4:"You can lightly mash the berries, if you don’t like the sauce as chunky.",
-  process5:"Serve and enjoy. You can serve warm or let the sauce cool and store in an airtight container in the fridge for a couple of weeks. Enjoy!",
-  recipevideo:"https://www.youtube.com/embed/AhVqQdSHU7s"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/09/pumpkin-peanut-butter-cups-7-680x1020.jpg",
-  recipename:"Pumpkin Peanut Butter Cups",
-   ingre1:"Natural Delights Medjool dates",
-  ingre2:"Pumpkin puree",
-  ingre3:"Creamy natural peanut butter",
-  ingre4:"splash of water as needed",
-  ingre5:"Dark chocolate + coconut oil",
-  process1:"Line a muffin tray with 12 muffin liners. Set aside.",
-  process2:"Place the chocolate and the coconut oil in a small bowl and melt. This can be done either in a double boiler or in the microwave in 20-30 seconds spurts, stirring in between.",
-  process3:"Pour a heaping 1/2 tablespoon into each muffin liner. Using a spoon, gentle press the chocolate 1/4 of the way up the sides of the muffin liners. Place in the fridge wile you make the filling.",
-  process4:"In a blender or food processor, combine the dates, peanut butter, pumpkin, 1 tablespoon of water and pumpkin pie spice. Blend. Add more water, 1 tablespoon at a time, as needed to get your blender going. You want as little water as possible but a little is likely necessary.",
-  process5:"Divid the pumpkin mixture evenly into the muffin cups on top of the chocolate. Spoon a heaping 1/2 tablespoon of chocolate on top of each cup and tap the muffin tray lightly to smooth them out. Top with sea salt if desired.Place in the fridge for about 30 minutes to harden up and ENJOY!",
-  recipevideo:"https://www.youtube.com/embed/sBRBSrHamrY"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/08/Poached-Pears-4-680x1020.jpg",
-  recipename:"Vanilla Poached Pears",
-   ingre1:"Water + sugar. When simmered together with the pears, these ingredients will create a sweet syrup.",
-  ingre2:"Pears. You’ll need to make sure the pears you use are soft, yet still slightly firm to the touch. Use Bartlett, Bosc, Anjou or even Red Asian Pears. ",
-  ingre3:"Cinnamon. This warming spice pairs well with the texture and flavor of cooked pears. ",
-  ingre4:"Star anise. For a lovely sweet, licorice-like flavor.",
-  ingre5:"Vanilla. Adds to the sweet caramelized flavor of the poached peaches.",
-  process1:"Prep the pears. Start this recipe with washing and peeling the pears.",
-  process2:"Combine ingredients. Place the pears in a large pot with the water. Add the sugar, cinnamon, anise, and vanilla.",
-  process3:"Cook pears. Bring the ingredients to a boil and reduce the heat to low. Simmer for about 30 to 40 minutes or until the pears are tender and the liquid is thickened, like syrup.",
-  process4:"Serve and enjoy. Serve the pears warm on their own, or with a bit of the leftover syrup.",
-  process5:"We love to garnish with a sprinkle of cinnamon and/or a drizzle of caramel sauce, or you can also use an anise star, which looks really beautiful when serving at an event. Enjoy!",
-  recipevideo:"https://www.youtube.com/embed/lNY3rSzXOBg"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/06/strawberry-brownies-11-680x1020.jpg",
-  recipename:"Strawberry Brownies",
-   ingre1:"Flaxseed meal + water. Typically, this recipe would be made with eggs, but to veganize it, we’re mixing ground flaxseed with water to make flax eggs. ",
-  ingre2:"Strawberry cake mix. You’ll need a box of strawberry cake mix. Double check that it’s vegan, if desired.",
-  ingre3:"I used Duncan Hines Perfectly Moist Strawberry Supreme Cake Mix.",
-  ingre4:"Vegetable oil. A little added oil will yield brownies with the perfect moist texture.",
-  ingre5:"Glaze. Don’t leave the glaze off. It really makes these brownies special! It’s a simple mix of powdered sugar, plant-based milk and vanilla extract.",
-  process1:"Prepare oven and baking pan. Preheat your oven to 350ºF. Spray an 8×8-inch baking pan or dish with nonstick baking spray or line it with parchment paper.",
-  process2:"Make flax eggs. Stir to combine flaxseed meal and water in a small bowl. Place the mixture in the fridge to set for 10 minutes. ",
-  process3:"Combine all ingredients. In one large bowl, stir all of the ingredients together, including the flax eggs.",
-  process4:"Bake. Transfer the batter to the prepared baking pan and evenly smooth out the top. Bake for 33-35 minutes, or until a toothpick inserted into the brownies comes out clean. ",
-  process5:"Make the glaze. Remove the brownies from the oven and place the pan on a wire rack. While the brownies are still warm, whisk together the glaze ingredients and pour the mixture evenly over the warm brownies.Cool and serve. Let the brownies cool in the pan for about 1 hour, then cut into squares and enjoy!",
-  recipevideo:"https://www.youtube.com/embed/Ylt4ltDFHEw"}]
+function App() { 
   
-  const [dessertrep, setDessertrep] = useState(initial_dessert);
-  
-const initial_salad =[
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/04/street-corn-pasta-salad-5-680x1020.jpg", 
-  recipename:"Mexican Corn Pasta Salad",
-  ingre1:"Pasta - I used a simple rotini but really any kind of bite sized pasta would work well including a veggie pasta such as lentil pasta.",
-  ingre2:"Crema Sauce - this is based heavily off of traditional street corn but thinned out a little so that everything can get coated in it.",
-  ingre3:"Lots of veggies - bell pepper, cilantro, onion, avocado, etc.",
-  ingre4:"Grilled Corn - I LOVE freshly grilled corn in this recipe BUT you could certainly use canned corn for ease.",
-  ingre5:"If doing so, I suggest looking for fire-roasted corn in the can so you get that roasted flavor!",
-  process1:"Cook your pasta according to package directions. Once done, drain and rinse under cold water. You can also leave the pasta warm if you’d prefer.",
-  process2:"If you haven't already done so, cut the corn off of the cobb and place into a large bowl.",
-  process3:"Make the sauce by mixing together the sour cream, mayo, lime zest and juice, garlic, chili powder, cumin, and a couple large pinches of salt and pepper.",
-  process4:"Into the bowl with corn, mix in the pasta, cilantro, red onion, avocado, bell pepper, and cotija. Pour the sauce over top and toss to combine.",
-  process5:"Garnish as desired and ENJOY! Store leftovers in an airtight container in the fridge for up to 3 days.",
-  recipevideo:"https://www.youtube.com/embed/HdslY0NrZeU"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2022/01/Chickpea-Tacos-3-680x1020.jpg", 
-  recipename:"Chickpea Tacos",
-  ingre1:"Chickpeas. These might just be my favorite legume. They are so versatile, from hummus to salads, chickpeas are a pretty awesome food! You’ll need 2 cans to make these tacos.",
-  ingre2:"Olive oil. For cooking the chickpeas.",
-  ingre3:"Spices. I love the flavorful mix of spices used to season the chickpeas in this recipe. We’re using a tasty blend of cumin, chili powder, salt, black pepper, oregano and paprika. It’s so much tastier than store-bought taco seasoning packets and so easy too! ",
-  ingre4:"Water. Adding a bit of water will help the seasoning blend coat the chickpeas.",
-  ingre5:"For serving. Serve your chickpea tacos using corn tortillas, flour tortillas or use any favorite wrap. We also like to add fresh cilantro, diced red onion, a squeeze of fresh lime juice and a sprinkle of cotija (or feta) cheese. Feel free to add any favorite toppings that you prefer.",
-  process1:"Making tacos has never been easier or more delicious with these flavorful chickpea tacos! You can have this mouth-watering meal on the table in less than 20 minutes, including prep time! Here’s the easy method:",
-  process2:"Prep the chickpeas. Drain and rinse the chickpeas, and then dry them off so that most of the excess moisture is gone.",
-  process3:"Cook the chickpeas. In a large skillet, heat the oil over medium high heat. Once hot, add in the chickpeas and cook, stirring often, for 10 minutes.",
-  process4:"Season the chickpea taco filling. Add in the spices and ¼ cup of water and cook for 2 more minutes, tossing so that the chickpeas get completely covered in the spices. Remove from the heat.",
-  process5:"Assemble the tacos. Fill warm tortillas with the chickpea taco filling. Now, add any other preferred toppings. Serve and enjoy!",
-  recipevideo:"https://www.youtube.com/embed/_zrh1mOGB2Q"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2018/11/Pom-Cocktail-Korbel-10-600x900.jpg", 
-  recipename:"Pomegranate Cocktail",
-  ingre1:"1/2 cup of white sugar, 1/2 cup of water, 2 sprigs of rosemary",
-  ingre2:"1/4 cup of pomegranate juice, 1 tablespoon (or more to taste) of the rosemary simple syrup",
-  ingre3:"1 cup of champagne for serving: extra sprigs of rosemary, pomegranate seeds",
-  ingre4:"6 ounces of pomegranate juice, 1 bottle of Korbel® Brut",
-  ingre5:"4 tablespoons of rosemary simple syrup for serving: extra sprigs of rosemary, pomegranate seeds",
-  process1:"Combine the sugar, water, and rosemary in a small saucepan and heat to simmering. ",
-  process2:"Simmer for 2 minutes and then remove from heat. Let steep for 30 minutes before discarding the rosemary sprigs.",
-  process3:"Store in the fridge in a sealed container.",
-  process4:"Mix all ingredients in a cocktail glass, garnish with pomegranate seeds and rosemary, and serve.",
-  process5:"Mix all of the ingredients in a pitcher and garnish with fresh rosemary and pomegranate seeds.",
-  recipevideo:"https://www.youtube.com/embed/HmsbfPsAr5k"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2019/07/Vegan-Pizza-12-600x900.jpg", 
-  recipename:"Vegan Pizza Recipe",
-  ingre1:"One vegan pizza dough, 1/2 cup of marinara sauce (more or less as desired, I like a lot), 1 small green bell pepper, diced",
-  ingre2:"½ teaspoon of garlic powder, 1 teaspoon of Italian seasoning",
-  ingre3:"¼ teaspoon of fine sea salt, ⅔ cup of mushrooms, thinly sliced",
-  ingre4:"1/4 cup of sliced black olives, ½ cup of red onion",
-  ingre5:"optional: vegan cheese for topping",
-  process1:"Pre-heat the oven to 450 degrees F. If you haven't already done so, prepare your crust. Recipe HERE. If you do NOT have a pizza stone, pre-bake the crust for 5 minutes after poking small holes all over the crust. If you DO have a pizza stone, you can skip the pre-baking process.",
-  process2:"Heat the oil in a large skillet over medium heat and once hot, add in the peppers, onion, and spices. Saute for 10 minutes, stirring often. Add in the mushrooms and saute for 5 additional minutes. Take off of the heat and set aside.",
-  process3:"To assemble the pizza, spread your sauce evenly over the pizza crust and then top with the sauteed veggies. If using, evenly distribute the black olives and the raw red onion on the pizza as well.",
-  process4:"Bake for 15-18 minutes or until the crust is nice and golden brown around the edges.",
-  process5:"Top with optional vegan parmesan cheese and ENJOY!",
-  recipevideo:"https://www.youtube.com/embed/4RdKPHibSME"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/03/pesto-gnocchi-2-680x1020.jpg", 
-  recipename:"Brussels Sprouts Pesto Gnocchi",
-  ingre1:"⅔ cup of pesto, 16 oz package of gnocchi",
-  ingre2:"16 ounce package of Ocean Mist Quick Cook Sprouts",
-  ingre3:"1 tablespoon of olive oil",
-  ingre4:"Salt and pepper to taste",
-  ingre5:"Parmesan for garnish ",
-  process1:"Cook the gnocchi according to package directions. Once done, drain the water and add the gnocchi back into the pot.",
-  process2:"While the gnocchi is cooking, open the package of sprouts and add in the olive oil, salt and pepper.",
-  process3:"Give it a shake to lightly combine and then re-seal the package.",
-  process4:"The directions call for you to cook it for 5 minutes but I like a little bite left in my sprouts so I cook them for just 4 minutes.",
-  process5:"Into the pot with the gnocchi, mix in the pesto and sprouts until everything is covered in the pesto. Sprinkle with optional cheese and ENJOY!",
-  recipevideo:"https://www.youtube.com/embed/GjtnhE14muE"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2020/04/classic-mojito-6.jpg", 
-  recipename:"Classic Mojito Recipe",
-  ingre1:"2 ounces of white rum, 1/2 of a medium lime, juiced (about 1 1/2 - 2 tablespoons/ 3/4 oz of juice)",
-  ingre2:"1 1/2 tablespoons (3/4 oz) of simple syrup, 5 mint leaves",
-  ingre3:"Club soda or sparkling water to top",
-  ingre4:"Ice",
-  ingre5:"Garnish: additional mint + lime wedges",
-  process1:"In a cocktail shaker or tall glass, muddle together the mint and lime juice.",
-  process2:"Add in the simple syrup, rum, and ice.",
-  process3:"Cover and shake about 30 times or until the liquid is cold and fully combined.",
-  process4:"Strain into a tall glass filled with ice and top with the club soda.",
-  process5:"Garnish and enjoy!",
-  recipevideo:"https://www.youtube.com/embed/NANdz-YKMUw"},
-  {recipeimage:"https://foodwithfeeling.com/wp-content/uploads/2021/03/air-fryer-asparagus-4.jpg", 
-  recipename:"Air Fryer Asparagus",
-  ingre1:"Asparagus. be sure to use fresh asparagus for making asparagus in the air fryer.",
-  ingre2:"Olive oil. my go to is olive oil for this recipe, but avocado oil works too.",
-  ingre3:"Garlic powder. I love asparagus seasoned with garlic powder, but if you have another favorite seasoning, you can totally swap this out for something else.",
-  ingre4:"Salt & pepper. to bring all of the flavors together.",
-  ingre5:"Parmesan cheese. optional, but so delicious!",
-  process1:"This asparagus recipe could not be easier! Here’s a quick rundown of what’s involved, but you can find the complete printable recipe at the bottom of the post.",
-  process2:"Pre-heat the air fryer. Depending on the model of your air fryer (some don’t have the preheat function) preheat to 400 degrees F for 5 minutes.",
-  process3:"Prep the asparagus. Trim off the hard white ends. Drizzle with olive oil and sprinkle on the garlic powder, salt and pepper. Toss gently to combine.",
-  process4:"Cook the asparagus. Lay the asparagus flat in your air fryer, being careful not to stack it as best possible. Air fry for 5 minutes and then sprinkle on the parmesan cheese (if using) and continue to air fry for 2-4 additional minutes. ",
-  process5:"Enjoy! Sprinkle with additional parmesan as desired and serve.",
-  recipevideo:"https://www.youtube.com/embed/Os2epoeLfiU"}]
+const [dessertrep, setDessertrep] = useState([]);
 
-const [saladrep, setSaladrep] = useState(initial_salad);
+
 
   const history = useHistory();
 
@@ -207,6 +27,22 @@ const [saladrep, setSaladrep] = useState(initial_salad);
       mode: mode,
     },
   });
+
+  console.log(dessertrep);
+  useEffect(()=>{
+    fetch(`${API_URL}/dessertrecipe`, {method:"GET"})
+    .then((data)=>data.json())
+    .then((mvs)=>setDessertrep(mvs));
+  }, []);
+
+  const [saladrep, setSaladrep] = useState([]);
+
+  console.log(saladrep);
+  useEffect(()=>{
+    fetch(`${API_URL}/saladrecipe`, {method:"GET"})
+    .then((data)=>data.json())
+    .then((mvs)=>setSaladrep(mvs));
+  }, []);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -221,8 +57,8 @@ const [saladrep, setSaladrep] = useState(initial_salad);
       <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Salad</Button>
        <Button varient="text" color="inherit" onClick={()=>history.push("/dessert")}>Dessert</Button>
 
-       <Button varient="text" color="inherit" onClick={()=>history.push("/log in")}>Log in</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/log in")}>Sign up</Button>
+       <Button varient="text" color="inherit" onClick={()=>history.push("/login")}>Log in</Button>
+       <Button varient="text" color="inherit" onClick={()=>history.push("/signup")}>Sign up</Button>
       
        </div>
        <Switch>
@@ -232,23 +68,47 @@ const [saladrep, setSaladrep] = useState(initial_salad);
         </Route>
        
         <Route path="/dessert/:id">
-        <DessertMoredetails dessertrep={dessertrep}/>
+        <DessertMoredetails />
         </Route>
 
         <Route path="/dessert">
-        <Dessert dessertrep={dessertrep} setDessertrep={setDessertrep}/>
+        <Dessert />
         </Route>
 
         <Route path="/salad/:id">
-        <SaladMoredetails saladrep={saladrep}/>
+        <SaladMoredetails />
         </Route>
 
         <Route path="/salad">
-        <Salad saladrep={saladrep} setSaladrep={setSaladrep}/>
+        <Salad />
         </Route>
 
         <Route path="/about">
         <About/>
+        </Route>
+
+        <Route path="/signupsuccess">
+          <SignupSuccess />
+        </Route>
+
+        <Route path="/signupfailed">
+          <SignupFailed />
+        </Route>
+
+        <Route path="/loginsuccess">
+          <LoginSuccess />
+        </Route>
+
+        <Route path="/loginfailed">
+          <LoginFailed />
+        </Route>
+
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        
+          <Route path="/signup">
+          <SignupPage />
         </Route>
 
         <Route path="**">
@@ -319,7 +179,18 @@ function About(){
   );
 }
 
-function Dessert({dessertrep,setDessertrep}){
+function Dessert(){
+
+  const [dessertrep, setDessertrep] = useState([]);
+  
+const getDessert = () => {
+  fetch(`${API_URL}/dessertrecipe`, {method:"GET"})
+  .then((data)=>data.json())
+  .then((mvs)=>setDessertrep(mvs));
+};
+
+useEffect(getDessert, []);
+
   return(
     <div>
        <div className='dessert-line'></div>
@@ -345,11 +216,22 @@ function DessertList({recipeimage,recipename,id}){
   );
 }
 
-function DessertMoredetails({dessertrep}){
+function DessertMoredetails(){
   const history = useHistory();
   const {id} = useParams();
-  const dessertdet = dessertrep[id]; 
-  console.log(dessertdet);
+  // const dessertdet = dessertrep[id]; 
+  
+
+  const [dessertdet, setDessertdet] = useState({});
+
+useEffect(()=>{
+  fetch(`${API_URL}/dessertrecipe/${id}`, {method:"GET"})
+  .then((data)=>data.json())
+  .then((mv)=>setDessertdet(mv));
+}, [id]);
+
+console.log(dessertdet);
+
   return(
     <div >
       <div className='line-detl'></div>
@@ -390,7 +272,16 @@ function DessertMoredetails({dessertrep}){
   );
 }
 
-function Salad({saladrep,setSaladrep}){
+function Salad(){
+  const [saladrep, setSaladrep] = useState([]);
+  // App is mounted -> useEffect call only once -> inside fetch -> and setMovies 
+const getSalad = () => {
+  fetch(`${API_URL}/saladrecipe`, {method:"GET"})
+  .then((data)=>data.json())
+  .then((mvs)=>setSaladrep(mvs));
+};
+
+useEffect(getSalad, []);
   return(
     <div>
        <div className='dessert-line'></div>
@@ -416,10 +307,19 @@ function SaladList({recipeimage,recipename,id}){
   );
 }
 
-function SaladMoredetails({saladrep}){
+function SaladMoredetails(){
   const history = useHistory();
   const {id} = useParams();
-  const dessertdet = saladrep[id]; 
+  // const dessertdet = saladrep[id]; 
+ 
+  const [dessertdet, setDessertdet] = useState({});
+
+  useEffect(()=>{
+    fetch(`${API_URL}/saladrecipe/${id}`, {method:"GET"})
+    .then((data)=>data.json())
+    .then((mv)=>setDessertdet(mv));
+  }, [id]);
+  
   console.log(dessertdet);
   return(
     <div >
@@ -495,6 +395,176 @@ function Footer(){
   );
 }
 
+
+function LoginPage(){
+  const history = useHistory();
+  const formvalidationschema = yup.object({
+    email: yup.string().min(5, "need a bigger email").required(),
+    password: yup.string().min(5).max(12).required(),
+  });
+
+  const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
+    initialValues: { email: "", password:""},
+    validationSchema: formvalidationschema,
+
+    onSubmit: (newlogin) => {
+      console.log("onsubmit", newlogin);
+      addData(newlogin);
+    }
+  });
+
+  const addData =(newlogin)=>{
+    console.log(newlogin)
+      fetch(`${API_URL}/login`, {
+        method:"POST",
+        body: JSON.stringify(newlogin),
+        headers: {'Content-Type': 'application/json'},
+    }).then((response)=>{
+      if(response.status===401){
+        history.push("/loginfailed")
+      }else{
+        history.push("/loginsuccess")
+      }
+    
+      });
+
+    };
+
+  return(
+    <form className="login-page" onSubmit={handleSubmit}>
+      
+     <h1 className="login-head">Login</h1>
+     <h4 className="please">Please enter your e-mail id and Password</h4>  
+    
+    <TextField id="email" 
+    name="email" 
+    value = {values.email} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type = "email" 
+    error={errors.email && touched.email}
+    helperText={errors.email && touched.email && errors.email}
+    placeholder = "Enter your Email"/>
+
+
+    <TextField id="password" 
+    name="password" 
+    value = {values.password} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type="password"
+    autoComplete="current-password"
+    error={errors.password && touched.password}
+    helperText={errors.password && touched.password && errors.password}
+    placeholder = "Enter your Password"/>
+    
+    <Button variant="outlined" type="submit">log in</Button>
+
+    
+  </form>
+    
+  );
+}
+
+function SignupPage(){
+  const history = useHistory();
+  const formvalidationschema = yup.object({
+    email: yup.string().min(5, "need a bigger email").required(),
+    password: yup.string().min(5).max(12).required(),
+  });
+
+  const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
+    initialValues: { email: "", password:""},
+    validationSchema: formvalidationschema,
+
+    onSubmit: (newSignup) => {
+      console.log("onsubmit", newSignup);
+      addData(newSignup);
+    }
+  });
+  const addData =(newSignup)=>{
+    console.log(newSignup)
+      fetch(`${API_URL}/signup`, {
+        method:"POST",
+        body: JSON.stringify(newSignup),
+        headers: {'Content-Type': 'application/json'},
+    }).then((response)=>{
+    if(response.status===400){
+      history.push("/signupfailed")
+    }else{
+      history.push("/signupsuccess")
+    }
+    // console.log(response.status));
+    });
+    };
+  return(
+    <form className="login-page" onSubmit={handleSubmit}>
+    <div className="login-page">
+    <h1 className="login-head">sign up</h1>
+    <h4 className="please">Please enter your e-mail id and Password</h4>
+    <TextField id="email" 
+    name="email" 
+    value = {values.email} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type = "email" 
+    error={errors.email && touched.email}
+    helperText={errors.email && touched.email && errors.email}
+    placeholder = "Enter your Email"/>
+
+<TextField id="password" 
+    name="password" 
+    value = {values.password} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type="password"
+    autoComplete="current-password"
+    error={errors.password && touched.password}
+    helperText={errors.password && touched.password && errors.password}
+    placeholder = "Enter your Password"/>
+       <Button variant="contained" type="submit" >sign up</Button>
+      
+   </div>
+   </form>
+  );
+}
+
+
+function LoginSuccess(){
+  return(
+    <div>
+      <img className="success" src="https://tse4.mm.bing.net/th?id=OIP.kPQ0PJHdeZL0H9HLZfbsGQAAAA&pid=Api&P=0&w=214&h=177" alt="Login success" />
+      <h2>Successfully logged in</h2>
+    </div>
+  );
+}
+
+function LoginFailed(){
+  return(
+    <div>
+      <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="Login failed" />
+      <h2>Invalid Credentials</h2>
+    </div>
+  );
+}
+
+function SignupSuccess(){
+  return(
+    <div>
+      <img className="success" src="https://tse4.mm.bing.net/th?id=OIP.kPQ0PJHdeZL0H9HLZfbsGQAAAA&pid=Api&P=0&w=214&h=177" alt="signup success" />
+      <h2>Successfully signed up</h2>
+    </div>
+  );
+}
+
+function SignupFailed(){
+  return(
+    <div>
+      <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="signup failed" />
+      <h2>email already exists or password must be longer</h2>
+    </div>
+  );
+}
 
 
 
