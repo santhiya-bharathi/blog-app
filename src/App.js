@@ -15,15 +15,11 @@ import IconButton from '@mui/material/IconButton';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-const API_URL = "https://621885221a1ba20cbaa3262f.mockapi.io";
-// const API_URL = "https://blog-recipe-node-app.herokuapp.com";
+// const API_URL = "https://621885221a1ba20cbaa3262f.mockapi.io";
+const API_URL = "https://blog-recipe-node-app.herokuapp.com";
 
 function App() { 
   
-const [dessertrep, setDessertrep] = useState([]);
-
-
-
   const history = useHistory();
 
   const [mode, setMode] = useState("dark");
@@ -34,18 +30,12 @@ const [dessertrep, setDessertrep] = useState([]);
     },
   });
 
-  console.log(dessertrep);
-  useEffect(()=>{
-    fetch(`${API_URL}/recipe`, {method:"GET"})
-    .then((data)=>data.json())
-    .then((mvs)=>setDessertrep(mvs));
-  }, []);
 
   const [saladrep, setSaladrep] = useState([]);
 
   console.log(saladrep);
   useEffect(()=>{
-    fetch(`${API_URL}/recipe`, {method:"GET"})
+    fetch(`${API_URL}/saladrecipe`, {method:"GET"})
     .then((data)=>data.json())
     .then((mvs)=>setSaladrep(mvs));
   }, []);
@@ -183,7 +173,7 @@ function Salad(){
   const [saladrep, setSaladrep] = useState([]);
   
 const getSalad = () => {
-  fetch(`${API_URL}/recipe`, {method:"GET"})
+  fetch(`${API_URL}/saladrecipe`, {method:"GET"})
   .then((data)=>data.json())
   .then((mvs)=>setSaladrep(mvs));
 };
@@ -191,7 +181,7 @@ const getSalad = () => {
 useEffect(getSalad, []);
 
 // const deleteMovie = (id) =>{
-//   fetch(`${API_URL}/recipe/${id}`, {method:"DELETE"})
+//   fetch(`${API_URL}/saladrecipe/${id}`, {method:"DELETE"})
 //   .then(()=>getSalad());
 // };
 const history = useHistory();
@@ -199,7 +189,7 @@ const history = useHistory();
     <div>
        <div className='rec-line'></div>
     <div className='dessert-display-flex'>
-      {saladrep.map(({recipeimage, recipename, id})=>(<SaladList key={id} recipeimage={recipeimage} recipename={recipename} id={id}
+      {saladrep.map(({recipeimage, recipename, id, _id})=>(<SaladList key={_id} id={_id} recipeimage={recipeimage} recipename={recipename}
       
     //   deleteButton= {<IconButton aria-label="delete" color="error"
     //    onClick={()=> deleteMovie(id)}>
@@ -209,7 +199,7 @@ const history = useHistory();
       editButton= {<IconButton 
         style={{marginLeft:"auto"}}
         aria-label="edit"  color="success"
-       onClick={()=>history.push("/salad/edit/" + id)}>
+       onClick={()=>history.push("/salad/edit/" + _id)}>
        <EditIcon />
      </IconButton>}
       />))}
@@ -249,7 +239,7 @@ function SaladMoredetails(){
   const [dessertdet, setDessertdet] = useState({});
 
   useEffect(()=>{
-    fetch(`${API_URL}/recipe/${id}`, {method:"GET"})
+    fetch(`${API_URL}/saladrecipe/${id}`, {method:"GET"})
     .then((data)=>data.json())
     .then((mv)=>setDessertdet(mv));
   }, [id]);
@@ -317,7 +307,7 @@ const formvalidationschema = yup.object({
 
 const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
   initialValues: { recipeimage: "", recipename:"", ingre1:"", ingre2:"", ingre3:"", ingre4:"", ingre5:"",
-   process1:"", process2:"", process3:"", process4:"", process5:""},
+   process1:"", process2:"", process3:"", process4:"", process5:"",recipevideo:""},
 
   validationSchema: formvalidationschema,
 
@@ -330,7 +320,7 @@ const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFor
 const addMovie =(newMovies)=>{
 
 console.log(newMovies)
-  fetch(`${API_URL}/recipe`, {
+  fetch(`${API_URL}/saladrecipe`, {
     method:"POST",
     body: JSON.stringify(newMovies),
     headers: {'Content-Type': 'application/json'},
@@ -465,6 +455,16 @@ console.log(newMovies)
       error={errors.process5 && touched.process5}
        helperText={errors.process5 && touched.process5 && errors.process5}
       variant="outlined" />
+
+       <TextField id="recipevideo" 
+      name="recipevideo" 
+      value = {values.recipevideo} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making video link" 
+      error={errors.recipevideo && touched.recipevideo}
+       helperText={errors.recipevideo && touched.recipevideo && errors.recipevideo}
+      variant="outlined" />
      
       <Button type="submit" variant="contained">Add Recipes</Button>
      
@@ -479,7 +479,7 @@ function Editsalad(){
  
 const [blogdet, setBlogdet] = useState(null);
 useEffect(()=>{
-  fetch(`${API_URL}/recipe/${id}`, {method:"GET"})
+  fetch(`${API_URL}/saladrecipe/${id}`, {method:"GET"})
   .then((data)=>data.json())
   .then((mv)=>setBlogdet(mv));
 }, [id]);
@@ -516,7 +516,8 @@ function UpdateBlog({blogdet}){
       process2:blogdet.process2,
       process3:blogdet.process3,
       process4:blogdet.process4,
-      process5:blogdet.process5},
+      process5:blogdet.process5,
+      recipevideo:blogdet.recipevideo},
     validationSchema: formvalidationschema,
   
     onSubmit: (updatedMovie) => {
@@ -528,7 +529,7 @@ function UpdateBlog({blogdet}){
   const editMovie =(updatedMovie)=>{
     console.log(updatedMovie);
  
-  fetch(`${API_URL}/recipe/${blogdet.id}`, {
+  fetch(`${API_URL}/saladrecipe/${blogdet._id}`, {
     method:"PUT",
     body: JSON.stringify(updatedMovie),
     headers: {'Content-Type': 'application/json'},
@@ -661,6 +662,16 @@ function UpdateBlog({blogdet}){
           error={errors.process5 && touched.process5}
            helperText={errors.process5 && touched.process5 && errors.process5}
           variant="outlined" />
+
+<TextField id="recipevideo" 
+      name="recipevideo" 
+      value = {values.recipevideo} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making video link" 
+      error={errors.recipevideo && touched.recipevideo}
+       helperText={errors.recipevideo && touched.recipevideo && errors.recipevideo}
+      variant="outlined" />
          
           <Button type="submit" variant="contained">Save Recipes</Button>
          
@@ -677,7 +688,7 @@ function Footer(){
      <h4 className="footer-words" varient="text" onClick={()=>history.push("/")}>Home</h4>
       <h4 className="footer-words" varient="text" onClick={()=>history.push("/about")}>About</h4>
       <h4 className="footer-words" varient="text" color="inherit" onClick={()=>history.push("/salad")}>Salad</h4>
-       <h4 className="footer-words" varient="text" color="inherit" onClick={()=>history.push("/dessert")}>Dessert</h4>
+       
      </div>
      <div className='footer-icon-link'>
        <a target="_blank" rel="noreferrer" href='https://www.facebook.com'>
