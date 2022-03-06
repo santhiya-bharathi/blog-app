@@ -9,8 +9,14 @@ import { Switch, Route, useParams } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { NotFound } from './NotFound';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import IconButton from '@mui/material/IconButton';
+// import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
-const API_URL = "https://recipe-blog-app-node.herokuapp.com";
+const API_URL = "https://621885221a1ba20cbaa3262f.mockapi.io";
+// const API_URL = "https://blog-recipe-node-app.herokuapp.com";
 
 function App() { 
   
@@ -30,7 +36,7 @@ const [dessertrep, setDessertrep] = useState([]);
 
   console.log(dessertrep);
   useEffect(()=>{
-    fetch(`${API_URL}/dessertrecipe`, {method:"GET"})
+    fetch(`${API_URL}/recipe`, {method:"GET"})
     .then((data)=>data.json())
     .then((mvs)=>setDessertrep(mvs));
   }, []);
@@ -39,7 +45,7 @@ const [dessertrep, setDessertrep] = useState([]);
 
   console.log(saladrep);
   useEffect(()=>{
-    fetch(`${API_URL}/saladrecipe`, {method:"GET"})
+    fetch(`${API_URL}/recipe`, {method:"GET"})
     .then((data)=>data.json())
     .then((mvs)=>setSaladrep(mvs));
   }, []);
@@ -54,9 +60,8 @@ const [dessertrep, setDessertrep] = useState([]);
     <div className='home-recipe'>
       <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Home</Button>
       <Button varient="text" color="inherit" onClick={()=>history.push("/about")}>About</Button>
-      <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Salad</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/dessert")}>Dessert</Button>
-
+      <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Recipe</Button>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/addsalad")}>Addrecipe</Button>
        <Button varient="text" color="inherit" onClick={()=>history.push("/login")}>Log in</Button>
        <Button varient="text" color="inherit" onClick={()=>history.push("/signup")}>Sign up</Button>
       
@@ -66,13 +71,13 @@ const [dessertrep, setDessertrep] = useState([]);
       <Route exact path="/">
           <Home />
         </Route>
-       
-        <Route path="/dessert/:id">
-        <DessertMoredetails />
+
+        <Route path="/addsalad">
+        <Addsalad />
         </Route>
 
-        <Route path="/dessert">
-        <Dessert />
+        <Route path="/salad/edit/:id">
+        <Editsalad />
         </Route>
 
         <Route path="/salad/:id">
@@ -125,14 +130,6 @@ const [dessertrep, setDessertrep] = useState([]);
 export default App;
 
 
-function NotFound(){
-  return(
-    <div>
-      <img className='notfound' src="https://i.pinimg.com/originals/5b/27/01/5b270123bd7f65a53d4f889baa8609d7.gif" alt="404 not found"/>
-    </div>
-  );
-}
-
 function Home() {
 
 const history = useHistory();
@@ -144,12 +141,13 @@ const history = useHistory();
      <h4 className='home-headings'>A food blog that makes cooking fun and simple - a perfect dish every time! Our easy and proof recipes deliver authentic flavors using modern and innovative techniques.</h4>
      
      <div className='home-gif-flex-1'>
-     
-    <img className='home-gif-img' onClick={()=>history.push("/salad") } src="https://i.gifer.com/GKG.gif" alt="salad"/>
-    <img className='home-gif-img' onClick={()=>history.push("/dessert") } src="https://www.honeyandbirch.com/wp-content/uploads/2015/03/2015-03-27-12.59.07-1.gif" alt="dessert"/>
-    <img className='home-gif-img' onClick={()=>history.push("/dessert") } src="https://c.tenor.com/S3N_CBsPJYgAAAAC/dessert-chocolate.gif" alt="dessert"/>
+     <div>
+    <img className='home-gif-img' onClick={()=>history.push("/salad") } src="https://www.licious.in/blog/wp-content/uploads/2020/12/3-Step-Chicken-Salad.jpg" alt="salad"/>
+    </div>
+    <div>
+    <img className='home-gif-img' onClick={()=>history.push("/salad") } src="https://www.onelovelylife.com/wp-content/uploads/2019/11/Citrus-Pomegranate-Mocktail7B.jpg" alt="Mocktail"/>
+    </div>
     
-    <img className='home-gif-img' onClick={()=>history.push("/salad") } src="https://i.gifer.com/9FfR.gif" alt="salad"/>
     </div>
    
      <Footer/>
@@ -170,7 +168,7 @@ function About(){
       <h4 className="about-para">I'm a student, now full time blogger. I live in india, I Love to Cook and Eat</h4>
       <h4 className="about-para">My mom is a talented chef and a food enthusiast.</h4>
       <h4 className="about-para">The flavors and aromas of her food were so vivid in my memory that with her guidance and precise techniques I was able to adjust the flavors in my dishes to be just like hers. Before I knew it, I was spending more and more time in the kitchen, experimenting with different ingredients, cuisines, presentations, and sharing my simplified recipes with family and friends.</h4>
-      <img className="dessert-img-det" src="https://dmn-dallas-news-prod.cdn.arcpublishing.com/resizer/-m--_IkcM5em4yoirph2pEOGYjE=/1200x630/smart/filters:no_upscale()/arc-anglerfish-arc2-prod-dmn.s3.amazonaws.com/public/NLBIFJIQAKOB4Z3H3DHLWSMWGI.jpg" alt="profile pic"/>
+      <img className="dessert-img-det pad-div-img" src="https://dmn-dallas-news-prod.cdn.arcpublishing.com/resizer/-m--_IkcM5em4yoirph2pEOGYjE=/1200x630/smart/filters:no_upscale()/arc-anglerfish-arc2-prod-dmn.s3.amazonaws.com/public/NLBIFJIQAKOB4Z3H3DHLWSMWGI.jpg" alt="profile pic"/>
       </div>
       </div>
 
@@ -179,129 +177,66 @@ function About(){
   );
 }
 
-function Dessert(){
 
-  const [dessertrep, setDessertrep] = useState([]);
-  
-const getDessert = () => {
-  fetch(`${API_URL}/dessertrecipe`, {method:"GET"})
-  .then((data)=>data.json())
-  .then((mvs)=>setDessertrep(mvs));
-};
-
-useEffect(getDessert, []);
-
-  return(
-    <div>
-       <div className='dessert-line'></div>
-    <div className='dessert-display-flex'>
-      {dessertrep.map(({recipeimage,recipename, _id},index)=>(<DessertList key={_id} recipeimage={recipeimage} recipename={recipename} id={_id}/>))}
-    </div>
-    <Footer/>
-    </div>
-  );
-}
-
-function DessertList({recipeimage,recipename,id}){
-  const history = useHistory();
-  return(
-    <div >
-      <div className='dessert-flex' 
-      onClick={()=>{console.log(id); 
-     history.push("/dessert/"+id); }}>
-      <img className="dessert-img" src={recipeimage} alt={recipename}/>
-      <h1 className="dessert-name">{recipename}</h1>
-    </div>
-    </div>
-  );
-}
-
-function DessertMoredetails(){
-  const history = useHistory();
-  const {id} = useParams();
-  // const dessertdet = dessertrep[id]; 
-  
-
-  const [dessertdet, setDessertdet] = useState({});
-
-useEffect(()=>{
-  fetch(`${API_URL}/dessertrecipe/${id}`, {method:"GET"})
-  .then((data)=>data.json())
-  .then((mv)=>setDessertdet(mv));
-}, [id]);
-
-console.log(dessertdet);
-
-  return(
-    <div >
-      <div className='line-detl'></div>
-      <div className='moredetails-div'>
-    <h1 className="dessert-name-det">{dessertdet.recipename}</h1>
-    <img className="dessert-img-det" src={dessertdet.recipeimage} alt={dessertdet.recipename}/>
-
-    <div className='det-div-flex'>
-    <h1 className="dessert-ingre-det">Ingredients</h1>
-
-    <div className='inte-div'>
-    <h3 className="dessert-ingre-det-para" >⭐{dessertdet.ingre1}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.ingre2}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.ingre3}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.ingre4}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.ingre5}</h3>
-    </div>
-    
-    <h1 className="dessert-make-det">How to make recipe</h1>
-
-    <div className='inte-div'>
-    <h3 className="dessert-ingre-det-para">Here's the simple process:</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.process1}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.process2}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.process3}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.process4}</h3>
-    <h3 className="dessert-ingre-det-para">⭐{dessertdet.process5}</h3>
-    </div>
-
-    <iframe className="recipevideo" width="800" height="500" src={dessertdet.recipevideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-   <div className="button">
-    <Button onClick={()=>history.push("/dessert") } variant="outlined">Dessert Page</Button>
-    </div>
-    </div>
-    </div>
-    <Footer/>
-    </div>
-  );
-}
 
 function Salad(){
   const [saladrep, setSaladrep] = useState([]);
-  // App is mounted -> useEffect call only once -> inside fetch -> and setMovies 
+  
 const getSalad = () => {
-  fetch(`${API_URL}/saladrecipe`, {method:"GET"})
+  fetch(`${API_URL}/recipe`, {method:"GET"})
   .then((data)=>data.json())
   .then((mvs)=>setSaladrep(mvs));
 };
 
 useEffect(getSalad, []);
+
+// const deleteMovie = (id) =>{
+//   fetch(`${API_URL}/recipe/${id}`, {method:"DELETE"})
+//   .then(()=>getSalad());
+// };
+const history = useHistory();
   return(
     <div>
-       <div className='dessert-line'></div>
+       <div className='rec-line'></div>
     <div className='dessert-display-flex'>
-      {saladrep.map(({recipeimage, recipename, _id})=>(<SaladList key={_id} recipeimage={recipeimage} recipename={recipename} id={_id}/>))}
+      {saladrep.map(({recipeimage, recipename, id})=>(<SaladList key={id} recipeimage={recipeimage} recipename={recipename} id={id}
+      
+    //   deleteButton= {<IconButton aria-label="delete" color="error"
+    //    onClick={()=> deleteMovie(id)}>
+    //    <DeleteIcon />
+    //  </IconButton>}
+      
+      editButton= {<IconButton 
+        style={{marginLeft:"auto"}}
+        aria-label="edit"  color="success"
+       onClick={()=>history.push("/salad/edit/" + id)}>
+       <EditIcon />
+     </IconButton>}
+      />))}
     </div>
     <Footer/>
     </div>
   );
 }
 
-function SaladList({recipeimage,recipename,id}){
+function SaladList({recipeimage,recipename,id,deleteButton,editButton}){
   const history = useHistory();
   return(
+    
     <div >
-      <div className='dessert-flex' 
-      onClick={()=>{console.log(id); 
-     history.push("/salad/"+id); }}>
+     
+      <div className='dessert-flex'>
       <img className="dessert-img" src={recipeimage} alt={recipename}/>
       <h1 className="dessert-name">{recipename}</h1>
+      <div className='info-edit-icon'>
+      <IconButton onClick={()=>{console.log(id);
+        history.push("/salad/"+id);
+        }} color="info" aria-label="more-info">
+        <MoreVertIcon/>
+</IconButton>
+      {editButton}
+      {/* {deleteButton} */}
+      </div>
     </div>
     </div>
   );
@@ -310,12 +245,11 @@ function SaladList({recipeimage,recipename,id}){
 function SaladMoredetails(){
   const history = useHistory();
   const {id} = useParams();
-  // const dessertdet = saladrep[id]; 
  
   const [dessertdet, setDessertdet] = useState({});
 
   useEffect(()=>{
-    fetch(`${API_URL}/saladrecipe/${id}`, {method:"GET"})
+    fetch(`${API_URL}/recipe/${id}`, {method:"GET"})
     .then((data)=>data.json())
     .then((mv)=>setDessertdet(mv));
   }, [id]);
@@ -326,8 +260,10 @@ function SaladMoredetails(){
       <div className='line-detl'></div>
       <div className='moredetails-div'>
     <h1 className="dessert-name-det">{dessertdet.recipename}</h1>
+    <div className='img-video-div'>
     <img className="dessert-img-det" src={dessertdet.recipeimage} alt={dessertdet.recipename}/>
-
+    <iframe className="recipevideo" width="500" height="400" src={dessertdet.recipevideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     <div className='det-div-flex'>
     <h1 className="dessert-ingre-det">Ingredients</h1>
 
@@ -350,7 +286,7 @@ function SaladMoredetails(){
     <h3 className="dessert-ingre-det-para">⭐{dessertdet.process5}</h3>
     </div>
 
-    <iframe className="recipevideo" width="800" height="500" src={dessertdet.recipevideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
    <div className="button">
     <Button onClick={()=>history.push("/salad") }variant="outlined">Salad and cocktail Page</Button>
     </div>
@@ -360,6 +296,378 @@ function SaladMoredetails(){
     </div>
   );
 }
+
+function Addsalad(){
+  const history = useHistory();
+
+const formvalidationschema = yup.object({
+  recipeimage: yup.string().required("why not fill this recipeimage?").min(4),
+  recipename: yup.string().required("why not fill this recipename?").min(5),
+  ingre1: yup.string().required("why not fill this ingredients?").min(5),
+  ingre2: yup.string().required("why not fill this ingredients?").min(5),
+  ingre3: yup.string().required("why not fill this ingredients?").min(5),
+  ingre4: yup.string().required("why not fill this ingredients?").min(5),
+  ingre5: yup.string().required("why not fill this ingredients?").min(5),
+  process1: yup.string().required("why not fill this process?").min(5),
+  process2: yup.string().required("why not fill this process?").min(5),
+  process3: yup.string().required("why not fill this process?").min(5),
+  process4: yup.string().required("why not fill this process?").min(5),
+  process5: yup.string().required("why not fill this process?").min(5),
+});
+
+const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
+  initialValues: { recipeimage: "", recipename:"", ingre1:"", ingre2:"", ingre3:"", ingre4:"", ingre5:"",
+   process1:"", process2:"", process3:"", process4:"", process5:""},
+
+  validationSchema: formvalidationschema,
+
+  onSubmit: (newMovies) => {
+    console.log("onsubmit", newMovies);
+    addMovie(newMovies);
+  }
+});
+
+const addMovie =(newMovies)=>{
+
+console.log(newMovies)
+  fetch(`${API_URL}/recipe`, {
+    method:"POST",
+    body: JSON.stringify(newMovies),
+    headers: {'Content-Type': 'application/json'},
+}).then(()=>history.push("/salad"));
+  
+};
+
+  return(
+    <div>
+      <div className='line-detl'></div>
+<form onSubmit={handleSubmit} className="add-recipe">
+
+<TextField id="recipeimage" 
+      name="recipeimage" 
+      value = {values.recipeimage} 
+      onChange={handleChange} 
+      onBlur={handleBlur}
+       label="upload recipeimage url" 
+       error={errors.recipeimage && touched.recipeimage}
+       helperText={errors.recipeimage && touched.recipeimage && errors.recipeimage}
+       variant="outlined" />
+       
+     
+     <TextField id="recipename" 
+      name="recipename" 
+      value = {values.recipename} 
+      onChange={handleChange} 
+      onBlur={handleBlur}
+      label="enter recipename"
+      error={errors.recipename && touched.recipename}
+      helperText={errors.recipename && touched.recipename && errors.recipename}
+       variant="outlined" />
+      
+
+      <TextField id="ingre1" 
+      name="ingre1" 
+      value = {values.ingre1} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter ingredients" 
+      error={errors.ingre1 && touched.ingre1}
+       helperText={errors.ingre1 && touched.ingre1 && errors.ingre1}
+      variant="outlined" />
+      
+      <TextField id="ingre2" 
+      name="ingre2" 
+      value = {values.ingre2} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter ingredients" 
+      error={errors.ingre2 && touched.ingre2}
+       helperText={errors.ingre2 && touched.ingre2 && errors.ingre2}
+      variant="outlined" />
+
+        <TextField id="ingre3" 
+      name="ingre3" 
+      value = {values.ingre3} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter ingredients" 
+      error={errors.ingre3 && touched.ingre3}
+       helperText={errors.ingre3 && touched.ingre3 && errors.ingre3}
+      variant="outlined" />
+
+        <TextField id="ingre4" 
+      name="ingre4" 
+      value = {values.ingre4} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter ingredients" 
+      error={errors.ingre4 && touched.ingre4}
+       helperText={errors.ingre4 && touched.ingre4 && errors.ingre4}
+      variant="outlined" />
+
+        <TextField id="ingre5" 
+      name="ingre5" 
+      value = {values.ingre5} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter ingredients" 
+      error={errors.ingre5 && touched.ingre5}
+       helperText={errors.ingre5 && touched.ingre5 && errors.ingre5}
+      variant="outlined" />
+
+  
+      <TextField id="process1" 
+      name="process1" 
+      value = {values.process1} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making process" 
+      error={errors.process1 && touched.process1}
+       helperText={errors.process1 && touched.process1 && errors.process1}
+      variant="outlined" />
+
+     <TextField id="process2" 
+      name="process2" 
+      value = {values.process2} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making process" 
+      error={errors.process2 && touched.process2}
+       helperText={errors.process2 && touched.process2 && errors.process2}
+      variant="outlined" />
+
+       <TextField id="process3" 
+      name="process3" 
+      value = {values.process3} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making process" 
+      error={errors.process3 && touched.process3}
+       helperText={errors.process3 && touched.process3 && errors.process3}
+      variant="outlined" />
+
+       <TextField id="process4" 
+      name="process4" 
+      value = {values.process4} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making process" 
+      error={errors.process4 && touched.process4}
+       helperText={errors.process4 && touched.process4 && errors.process4}
+      variant="outlined" />
+
+       <TextField id="process5" 
+      name="process5" 
+      value = {values.process5} 
+      onChange={handleChange} 
+      onBlur={handleBlur}  
+      label="enter recipe making process" 
+      error={errors.process5 && touched.process5}
+       helperText={errors.process5 && touched.process5 && errors.process5}
+      variant="outlined" />
+     
+      <Button type="submit" variant="contained">Add Recipes</Button>
+     
+    </form>
+    </div>
+  );
+} 
+
+function Editsalad(){
+ 
+  const {id} = useParams();
+ 
+const [blogdet, setBlogdet] = useState(null);
+useEffect(()=>{
+  fetch(`${API_URL}/recipe/${id}`, {method:"GET"})
+  .then((data)=>data.json())
+  .then((mv)=>setBlogdet(mv));
+}, [id]);
+
+  return blogdet? <UpdateBlog blogdet={blogdet}/>:"";
+  
+}
+function UpdateBlog({blogdet}){
+  const history = useHistory();
+
+ const formvalidationschema = yup.object({
+  recipeimage: yup.string().required("why not fill this recipeimage?").min(4),
+  recipename: yup.string().required("why not fill this recipename?").min(5),
+  ingre1: yup.string().required("why not fill this ingredients?").min(5),
+  ingre2: yup.string().required("why not fill this ingredients?").min(5),
+  ingre3: yup.string().required("why not fill this ingredients?").min(5),
+  ingre4: yup.string().required("why not fill this ingredients?").min(5),
+  ingre5: yup.string().required("why not fill this ingredients?").min(5),
+  process1: yup.string().required("why not fill this process?").min(5),
+  process2: yup.string().required("why not fill this process?").min(5),
+  process3: yup.string().required("why not fill this process?").min(5),
+  process4: yup.string().required("why not fill this process?").min(5),
+  process5: yup.string().required("why not fill this process?").min(5),
+});
+
+  const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
+    initialValues: { recipeimage: blogdet.recipeimage, recipename:blogdet.recipename, 
+      ingre1:blogdet.ingre1, 
+      ingre2:blogdet.ingre2, 
+      ingre3:blogdet.ingre3,
+      ingre4:blogdet.ingre4,
+      ingre5:blogdet.ingre5,
+      process1:blogdet.process1,
+      process2:blogdet.process2,
+      process3:blogdet.process3,
+      process4:blogdet.process4,
+      process5:blogdet.process5},
+    validationSchema: formvalidationschema,
+  
+    onSubmit: (updatedMovie) => {
+      console.log("onsubmit", updatedMovie);
+      editMovie(updatedMovie);
+    }
+  });
+
+  const editMovie =(updatedMovie)=>{
+    console.log(updatedMovie);
+ 
+  fetch(`${API_URL}/recipe/${blogdet.id}`, {
+    method:"PUT",
+    body: JSON.stringify(updatedMovie),
+    headers: {'Content-Type': 'application/json'},
+}).then(()=>history.push("/salad"))
+  };
+  return(
+    <div>
+    <div className='line-detl'></div>
+    <form onSubmit={handleSubmit} className="add-recipe">
+    
+    <TextField id="recipeimage" 
+          name="recipeimage" 
+          value = {values.recipeimage} 
+          onChange={handleChange} 
+          onBlur={handleBlur}
+           label="upload recipeimage url" 
+           error={errors.recipeimage && touched.recipeimage}
+           helperText={errors.recipeimage && touched.recipeimage && errors.recipeimage}
+           variant="outlined" />
+           
+         
+         <TextField id="recipename" 
+          name="recipename" 
+          value = {values.recipename} 
+          onChange={handleChange} 
+          onBlur={handleBlur}
+          label="enter recipename"
+          error={errors.recipename && touched.recipename}
+          helperText={errors.recipename && touched.recipename && errors.recipename}
+           variant="outlined" />
+          
+    
+          <TextField id="ingre1" 
+          name="ingre1" 
+          value = {values.ingre1} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter ingredients" 
+          error={errors.ingre1 && touched.ingre1}
+           helperText={errors.ingre1 && touched.ingre1 && errors.ingre1}
+          variant="outlined" />
+          
+          <TextField id="ingre2" 
+          name="ingre2" 
+          value = {values.ingre2} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter ingredients" 
+          error={errors.ingre2 && touched.ingre2}
+           helperText={errors.ingre2 && touched.ingre2 && errors.ingre2}
+          variant="outlined" />
+    
+            <TextField id="ingre3" 
+          name="ingre3" 
+          value = {values.ingre3} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter ingredients" 
+          error={errors.ingre3 && touched.ingre3}
+           helperText={errors.ingre3 && touched.ingre3 && errors.ingre3}
+          variant="outlined" />
+    
+            <TextField id="ingre4" 
+          name="ingre4" 
+          value = {values.ingre4} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter ingredients" 
+          error={errors.ingre4 && touched.ingre4}
+           helperText={errors.ingre4 && touched.ingre4 && errors.ingre4}
+          variant="outlined" />
+    
+            <TextField id="ingre5" 
+          name="ingre5" 
+          value = {values.ingre5} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter ingredients" 
+          error={errors.ingre5 && touched.ingre5}
+           helperText={errors.ingre5 && touched.ingre5 && errors.ingre5}
+          variant="outlined" />
+    
+      
+          <TextField id="process1" 
+          name="process1" 
+          value = {values.process1} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter recipe making process" 
+          error={errors.process1 && touched.process1}
+           helperText={errors.process1 && touched.process1 && errors.process1}
+          variant="outlined" />
+    
+         <TextField id="process2" 
+          name="process2" 
+          value = {values.process2} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter recipe making process" 
+          error={errors.process2 && touched.process2}
+           helperText={errors.process2 && touched.process2 && errors.process2}
+          variant="outlined" />
+    
+           <TextField id="process3" 
+          name="process3" 
+          value = {values.process3} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter recipe making process" 
+          error={errors.process3 && touched.process3}
+           helperText={errors.process3 && touched.process3 && errors.process3}
+          variant="outlined" />
+    
+           <TextField id="process4" 
+          name="process4" 
+          value = {values.process4} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter recipe making process" 
+          error={errors.process4 && touched.process4}
+           helperText={errors.process4 && touched.process4 && errors.process4}
+          variant="outlined" />
+    
+           <TextField id="process5" 
+          name="process5" 
+          value = {values.process5} 
+          onChange={handleChange} 
+          onBlur={handleBlur}  
+          label="enter recipe making process" 
+          error={errors.process5 && touched.process5}
+           helperText={errors.process5 && touched.process5 && errors.process5}
+          variant="outlined" />
+         
+          <Button type="submit" variant="contained">Save Recipes</Button>
+         
+        </form>
+        </div>
+      );
+  }
 
 function Footer(){
   const history = useHistory();
