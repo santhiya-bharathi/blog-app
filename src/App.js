@@ -19,8 +19,6 @@ import EditIcon from '@mui/icons-material/Edit';
 const API_URL = "https://blog-recipe-node-app.herokuapp.com";
 
 function App() { 
-  
-  const history = useHistory();
 
   const [mode, setMode] = useState("dark");
   console.log(setMode);
@@ -44,21 +42,18 @@ function App() {
     <ThemeProvider theme={darkTheme}>
     <Paper elevation={3} style={{borderRadius:"0px",minHeight:"100vh"}}>
     <div className="App">
-    <div>
-      <h1 className="foody-park">Sandee Foody Court</h1>
-    </div>
-    <div className='home-recipe'>
-      <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Home</Button>
-      <Button varient="text" color="inherit" onClick={()=>history.push("/about")}>About</Button>
-      <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Recipe</Button>
-      <Button varient="text" color="inherit" onClick={()=>history.push("/addsalad")}>Addrecipe</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/login")}>Log in</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/signup")}>Sign up</Button>
-      
-       </div>
+   
        <Switch>
       
-      <Route exact path="/">
+       <Route exact path="/">
+       <LoginPage />
+        </Route>
+
+        <Route path="/signup">
+          <SignupPage />
+        </Route>
+
+      <Route path="/home">
           <Home />
         </Route>
 
@@ -97,15 +92,8 @@ function App() {
         <Route path="/loginfailed">
           <LoginFailed />
         </Route>
-
-        <Route path="/login">
-          <LoginPage />
-        </Route>
         
-          <Route path="/signup">
-          <SignupPage />
-        </Route>
-
+        
         <Route path="**">
           <NotFound/>
         </Route>
@@ -125,6 +113,8 @@ function Home() {
 const history = useHistory();
 
   return (
+    <div>
+      <Buttonbar />
     <div className="home">
       <div className='line-home'></div>
      <h1 className='home-headings'>A food blog infused with culture and love</h1>
@@ -142,11 +132,32 @@ const history = useHistory();
    
      <Footer/>
     </div>
+    </div>
+  );
+}
+
+function Buttonbar(){
+  const history = useHistory();
+  return(
+    <div>
+ <div>
+      <h1 className="foody-park">Sandee Foody Court</h1>
+    </div>
+    <div className='home-recipe'>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/home")}>Home</Button>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/about")}>About</Button>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Recipe</Button>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/addsalad")}>Addrecipe</Button>
+      
+       </div>
+    </div>
   );
 }
 
 function About(){
   return(
+    <div>
+      <Buttonbar />
     <div>
       <div className='line-about'></div>
       <div className="moredetails-div">
@@ -163,6 +174,7 @@ function About(){
       </div>
 
       <Footer/>
+    </div>
     </div>
   );
 }
@@ -187,6 +199,8 @@ useEffect(getSalad, []);
 const history = useHistory();
   return(
     <div>
+    <Buttonbar />
+    <div>
        <div className='rec-line'></div>
     <div className='dessert-display-flex'>
       {saladrep.map(({recipeimage, recipename, id, _id})=>(<SaladList key={_id} id={_id} recipeimage={recipeimage} recipename={recipename}
@@ -205,6 +219,7 @@ const history = useHistory();
       />))}
     </div>
     <Footer/>
+    </div>
     </div>
   );
 }
@@ -246,6 +261,8 @@ function SaladMoredetails(){
   
   console.log(dessertdet);
   return(
+    <div>
+    <Buttonbar />
     <div >
       <div className='line-detl'></div>
       <div className='moredetails-div'>
@@ -283,6 +300,7 @@ function SaladMoredetails(){
     </div>
     </div>
     <Footer/>
+    </div>
     </div>
   );
 }
@@ -329,6 +347,8 @@ console.log(newMovies)
 };
 
   return(
+    <div>
+    <Buttonbar />
     <div>
       <div className='line-detl'></div>
 <form onSubmit={handleSubmit} className="add-recipe">
@@ -470,6 +490,7 @@ console.log(newMovies)
      
     </form>
     </div>
+    </div>
   );
 } 
 
@@ -536,6 +557,8 @@ function UpdateBlog({blogdet}){
 }).then(()=>history.push("/salad"))
   };
   return(
+    <div>
+    <Buttonbar />
     <div>
     <div className='line-detl'></div>
     <form onSubmit={handleSubmit} className="add-recipe">
@@ -677,6 +700,7 @@ function UpdateBlog({blogdet}){
          
         </form>
         </div>
+        </div>
       );
   }
 
@@ -743,7 +767,8 @@ function LoginPage(){
       if(response.status===401){
         history.push("/loginfailed")
       }else{
-        history.push("/loginsuccess")
+        alert('Login Successful')
+        history.push("/home")
       }
     
       });
@@ -751,6 +776,7 @@ function LoginPage(){
     };
 
   return(
+    <div>
     <form className="login-page" onSubmit={handleSubmit}>
       
      <h1 className="login-head">Login</h1>
@@ -782,7 +808,17 @@ function LoginPage(){
 
     
   </form>
-    
+   <div className='signup-link'>
+   <p className="please">Don't have an account ?</p>
+   <p onClick={() => history.push("/signup")} className="signup-word">SIGN UP</p>
+ </div>
+ <div>
+          <p className="please">Sample Credentials</p>
+          <p>Email: test@gmail.com</p>
+          <p>Password: password123@</p>
+
+        </div>
+ </div>
   );
 }
 
@@ -812,7 +848,8 @@ function SignupPage(){
     if(response.status===400){
       history.push("/signupfailed")
     }else{
-      history.push("/signupsuccess")
+      alert('signup Successful')
+      history.push("/login")
     }
     // console.log(response.status));
     });

@@ -350,6 +350,22 @@
   width: 200px;
  border-radius: 60%;
 }
+
+.signup-link{
+  display: flex;
+  flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.signup-word{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 200;
+  text-decoration: underline;
+}
+
 @media(max-width: 1180px){
   .img-video-div{
     display: flex;
