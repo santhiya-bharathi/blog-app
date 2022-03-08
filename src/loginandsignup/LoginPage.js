@@ -115,7 +115,7 @@ export function SignupPage() {
         history.push("/signupfailed");
       } else {
         alert('signup Successful');
-        history.push("/login");
+        history.push("/");
       }
       // console.log(response.status));
     });
