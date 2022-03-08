@@ -373,6 +373,10 @@
   min-height: 100vh;
  
 }
+.login-page-background-signup{
+  background-image: linear-gradient(to left top, #080d42, #3e0a4e, #690050, #900048, #af0e39);
+  min-height: 100vh;
+}
 
 
 @media(max-width: 1180px){

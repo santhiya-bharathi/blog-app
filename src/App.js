@@ -857,7 +857,7 @@ function SignupPage(){
     });
     };
   return(
-    <section className='login-page-background'>
+    <section className='login-page-background-signup'>
     <form className="login-page" onSubmit={handleSubmit}>
     <div className="login-page">
     <p className="login-head">sign up</p>
