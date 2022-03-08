@@ -326,11 +326,14 @@
   font-family: -webkit-pictograph ;
   letter-spacing: 1px;
   margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 40px;
 }
 .please{
   font-family: -webkit-pictograph ;
   font-weight: 300;
   letter-spacing: 1px;
+  font-size: 20px;
 }
 .icons{
   display: flex;
@@ -365,6 +368,12 @@
   font-weight: 200;
   text-decoration: underline;
 }
+.login-page-background{
+  background-image: linear-gradient(to right bottom, #080d42, #3e0a4e, #690050, #900048, #af0e39);
+  min-height: 100vh;
+ 
+}
+
 
 @media(max-width: 1180px){
   .img-video-div{

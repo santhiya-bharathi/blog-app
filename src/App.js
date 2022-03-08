@@ -776,10 +776,11 @@ function LoginPage(){
     };
 
   return(
-    <div>
+    <section className='login-page-background'>
+      <div>
     <form className="login-page" onSubmit={handleSubmit}>
       
-     <h1 className="login-head">Login</h1>
+     <p className="login-head">Login</p>
      <h4 className="please">Please enter your e-mail id and Password</h4>  
     
     <TextField id="email" 
@@ -818,7 +819,8 @@ function LoginPage(){
           <p>Password: password123@</p>
 
         </div>
- </div>
+        </div>
+ </section>
   );
 }
 
@@ -855,9 +857,10 @@ function SignupPage(){
     });
     };
   return(
+    <section className='login-page-background'>
     <form className="login-page" onSubmit={handleSubmit}>
     <div className="login-page">
-    <h1 className="login-head">sign up</h1>
+    <p className="login-head">sign up</p>
     <h4 className="please">Please enter your e-mail id and Password</h4>
     <TextField id="email" 
     name="email" 
@@ -883,6 +886,7 @@ function SignupPage(){
       
    </div>
    </form>
+   </section>
   );
 }
 
