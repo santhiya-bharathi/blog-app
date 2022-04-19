@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import { Switch, Route } from "react-router-dom";
 import { NotFound } from './NotFound';
 import { Footer } from './footerandabout/Footer';
-import { LoginPage, SignupPage, SignupSuccess, SignupFailed, LoginSuccess, LoginFailed } from './loginandsignup/LoginPage';
+
 import { Editsalad } from './addandedit/Editsalad';
 import { Addsalad } from './addandedit/Addsalad';
 import { SaladMoredetails, Salad } from './mainfile/Salad';
@@ -45,16 +45,9 @@ function App() {
        <Switch>
       
        <Route exact path="/">
-       <LoginPage />
+       <Home />
         </Route>
 
-        <Route path="/signup">
-          <SignupPage />
-        </Route>
-
-      <Route path="/home">
-          <Home />
-        </Route>
 
         <Route path="/addsalad">
         <Addsalad />
@@ -76,21 +69,7 @@ function App() {
         <About/>
         </Route>
 
-        <Route path="/signupsuccess">
-          <SignupSuccess />
-        </Route>
-
-        <Route path="/signupfailed">
-          <SignupFailed />
-        </Route>
-
-        <Route path="/loginsuccess">
-          <LoginSuccess />
-        </Route>
-
-        <Route path="/loginfailed">
-          <LoginFailed />
-        </Route>
+       
         
         
         <Route path="**">
@@ -143,7 +122,7 @@ export function Buttonbar(){
       <h1 className="foody-park">Sandee Foody Court</h1>
     </div>
     <div className='home-recipe'>
-      <Button varient="text" color="inherit" onClick={()=>history.push("/home")}>Home</Button>
+      <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Home</Button>
       <Button varient="text" color="inherit" onClick={()=>history.push("/about")}>About</Button>
       <Button varient="text" color="inherit" onClick={()=>history.push("/salad")}>Recipe</Button>
       <Button varient="text" color="inherit" onClick={()=>history.push("/addsalad")}>Addrecipe</Button>
